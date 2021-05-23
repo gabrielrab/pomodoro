@@ -1,12 +1,5 @@
-import logo from "./logo.svg";
-import "./App.css";
-
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">Pomodoro App</header>
-    </div>
-  );
+  return <>Only Electron app runing using react</>;
 }
 
 export default App;
