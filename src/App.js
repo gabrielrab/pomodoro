@@ -1,12 +1,6 @@
 import React from "react";
-import { createNotification } from "./hooks/useNotification";
+import Routes from "./routes";
 
-function App() {
-  return (
-    <>
-      Only Electron app runing using react <button>Click</button>
-    </>
-  );
+export default function App() {
+  return <Routes />;
 }
-
-export default App;
