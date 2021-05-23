@@ -1,5 +1,15 @@
 import React from "react";
+import Layout from "@components/Layout";
+
+import useTimer from "@hooks/useTimer";
 
 export default function Index() {
-  return <>Hello World, here its index page!</>;
+  const { session } = useTimer();
+  return (
+    <Layout>
+      Hello World, here its index page!
+      <br />
+      Timer: {session}
+    </Layout>
+  );
 }
