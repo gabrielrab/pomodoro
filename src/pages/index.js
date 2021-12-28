@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Layout from "@components/Layout";
 
 import useTimer from "@hooks/useTimer";
@@ -17,13 +17,14 @@ import useTimer from "@hooks/useTimer";
 // Colocar o horário que vai terminar a sessão
 
 export default function Index() {
-  const { reset, min, sec, timerId, start } = useTimer();
+  const { reset, min, sec, timerId, start, session, onBreak } = useTimer();
   return (
     <Layout>
-      Hello World, here its index page!
+      {onBreak ? "Hora de relaxar!" : "Focus time!"}
       <br />
       Timer: {`${min}`.padStart(2, "0")}:{`${sec}`.padStart(2, "0")}
       <br />
+      Session: {session}
       <button onClick={start}>Start</button>
       <button onClick={() => clearInterval(timerId)}>Pause</button>
       <button onClick={reset}>Reset</button>
