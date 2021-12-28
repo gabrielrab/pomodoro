@@ -10,6 +10,7 @@ export default function TimerProvider({ children }) {
   const [timerId, setTimerId] = useState();
   const [session, setSession] = useState(1);
   const [onBreak, setOnBreak] = useState(false);
+  const [onPause, setOnPause] = useState(false);
   // const timer = { hour: 0, minute: DEFAULT_FOCUS_SESSION, second: 0 };
   const timer = { hour: 0, minute: 0, second: DEFAULT_FOCUS_SESSION };
   const [[hr, min, sec], setTime] = useState([
@@ -50,9 +51,15 @@ export default function TimerProvider({ children }) {
   }, [hr, min, onBreak, reset, sec]);
 
   const start = useCallback(() => {
+    setOnPause(false);
     let currentTimer = setInterval(() => tick(), 1000);
     setTimerId(currentTimer);
   }, [tick]);
+
+  const pause = useCallback(() => {
+    clearInterval(timerId);
+    setOnPause(true);
+  }, [timerId]);
 
   useEffect(() => {
     const timerId = setInterval(() => tick(), 1000);
@@ -62,7 +69,17 @@ export default function TimerProvider({ children }) {
 
   return (
     <TimerContext.Provider
-      value={{ min, sec, reset, timerId, start, session, onBreak }}
+      value={{
+        min,
+        sec,
+        reset,
+        timerId,
+        start,
+        onPause,
+        pause,
+        session,
+        onBreak,
+      }}
     >
       {children}
     </TimerContext.Provider>
