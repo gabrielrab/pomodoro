@@ -5,6 +5,7 @@ module.exports = function override(config) {
     "@components": "src/components",
     "@hooks": "src/hooks",
     "@providers": "src/providers",
+    "@assets": "src/assets",
   })(config);
 
   return config;

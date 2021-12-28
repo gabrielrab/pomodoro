@@ -1,5 +1,6 @@
 import React from "react";
 import Layout from "@components/Layout";
+import SessionStatus from "@components/SessionStatus";
 
 import useTimer from "@hooks/useTimer";
 
@@ -20,14 +21,16 @@ export default function Index() {
   const { reset, min, sec, timerId, start, session, onBreak } = useTimer();
   return (
     <Layout>
-      {onBreak ? "Hora de relaxar!" : "Focus time!"}
+      <SessionStatus onBreak={onBreak} />
       <br />
       Timer: {`${min}`.padStart(2, "0")}:{`${sec}`.padStart(2, "0")}
       <br />
       Session: {session}
-      <button onClick={start}>Start</button>
-      <button onClick={() => clearInterval(timerId)}>Pause</button>
-      <button onClick={reset}>Reset</button>
+      <div>
+        <button onClick={start}>Start</button>
+        <button onClick={() => clearInterval(timerId)}>Pause</button>
+        <button onClick={reset}>Reset</button>
+      </div>
     </Layout>
   );
 }
