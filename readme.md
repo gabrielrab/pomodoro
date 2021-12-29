@@ -2,23 +2,23 @@
 
 <img alt="Logo" align="right" src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/285/red-apple_1f34e.png" width="128" />
 
-Este é um Pomodoro App construido em Electron + React.
+This is a Pomodoro App built in Electron + React.
 
 ## About Pomodoro
 
-A Técnica Pomodoro é um método de gerenciamento de tempo. A técnica consiste na utilização de um cronômetro para dividir o trabalho em períodos de 25 minutos, separados por breves intervalos.
+The Pomodoro Technique is a method of time management. The technique consists of using a stopwatch to divide the work into periods of 25 minutes, separated by brief intervals.
 
 ## Features
 
-Além das funções básicas de um cronômetro de pomodoro, temos:
+In addition to the basic functions of a pomodoro stopwatch, we have:
 
-- Envio de notificação nativa.
-- Possibilidade de pausar a sessão.
-- Informação do horário de termino da sessão.
-- Contador de sessões.
-- 'Long break' depois de 4 sessões.
-- GIF representativo para cada estado (stop, work, break)
+- Native notification sending.
+- Possibility to pause the session.
+- Information on the end of the session.
+- Session counter.
+- 'Long break' after 4 sessions.
+- Representative GIF for each state (stop, work, break)
 
-### Créditos
+### Credits
 
-Todos os GIF utilizados no app foram foram criados por [Guillaume Kurkdjian](https://guillaumekurkdjian.com/).
+All GIF used in the app were created by [Guillaume Kurkdjian](https://guillaumekurkdjian.com/).
