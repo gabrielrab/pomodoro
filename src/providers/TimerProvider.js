@@ -5,6 +5,7 @@ import React, {
   useState,
   useMemo,
 } from "react";
+import { addMinutes, format } from "date-fns";
 
 import { createNotification } from "@hooks/useNotification";
 
@@ -30,6 +31,9 @@ export default function TimerProvider({ children }) {
   const [session, setSession] = useState(1);
   const [onBreak, setOnBreak] = useState(false);
   const [onPause, setOnPause] = useState(false);
+  const [endAt, setEndAt] = useState(
+    format(addMinutes(new Date(), DEFAULT_FOCUS_SESSION), "HH:mm")
+  );
   const timer = { hour: 0, minute: DEFAULT_FOCUS_SESSION, second: 0 };
   const [[hr, min, sec], setTime] = useState([
     timer.hour,
@@ -37,21 +41,32 @@ export default function TimerProvider({ children }) {
     timer.second,
   ]);
 
-  const reset = useCallback(
-    () =>
-      setTime([
-        parseInt(timer.hour),
-        parseInt(
+  const reset = useCallback(() => {
+    setTime([
+      parseInt(timer.hour),
+      parseInt(
+        !onBreak
+          ? session % 4
+            ? DEFAULT_SHORT_BREAK
+            : DEFAULT_LONG_BREAK
+          : DEFAULT_FOCUS_SESSION
+      ),
+      parseInt(timer.second),
+    ]);
+    setEndAt(
+      format(
+        addMinutes(
+          new Date(),
           !onBreak
             ? session % 4
               ? DEFAULT_SHORT_BREAK
               : DEFAULT_LONG_BREAK
             : DEFAULT_FOCUS_SESSION
         ),
-        parseInt(timer.second),
-      ]),
-    [onBreak, session, timer.hour, timer.second]
-  );
+        "HH:mm"
+      )
+    );
+  }, [onBreak, session, timer.hour, timer.second]);
 
   const tick = useCallback(() => {
     if (hr === 0 && min === 0 && sec === 0) {
@@ -90,8 +105,8 @@ export default function TimerProvider({ children }) {
   }, [tick]);
 
   const memorizedValues = useMemo(
-    () => ({ onPause, session }),
-    [onPause, session]
+    () => ({ onPause, session, endAt }),
+    [onPause, session, endAt]
   );
 
   return (

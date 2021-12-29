@@ -20,13 +20,15 @@ const SessionCount = styled.span`
 `;
 
 export default function Timer() {
-  const { min, sec, session } = useTimer();
+  const { min, sec, session, endAt } = useTimer();
   return (
     <TimerWrapper>
       <TickTimer>
         {`${min}`.padStart(2, "0")}:{`${sec}`.padStart(2, "0")}
       </TickTimer>
-      <SessionCount>Session: {session} - Termina as 23:10</SessionCount>
+      <SessionCount>
+        Session: {session} - Termina às {endAt}
+      </SessionCount>
     </TimerWrapper>
   );
 }
