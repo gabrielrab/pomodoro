@@ -30,8 +30,7 @@ export default function TimerProvider({ children }) {
   const [session, setSession] = useState(1);
   const [onBreak, setOnBreak] = useState(false);
   const [onPause, setOnPause] = useState(false);
-  // const timer = { hour: 0, minute: DEFAULT_FOCUS_SESSION, second: 0 };
-  const timer = { hour: 0, minute: 0, second: DEFAULT_FOCUS_SESSION };
+  const timer = { hour: 0, minute: DEFAULT_FOCUS_SESSION, second: 0 };
   const [[hr, min, sec], setTime] = useState([
     timer.hour,
     timer.minute,
@@ -42,7 +41,6 @@ export default function TimerProvider({ children }) {
     () =>
       setTime([
         parseInt(timer.hour),
-        parseInt(timer.minute),
         parseInt(
           !onBreak
             ? session % 4
@@ -50,9 +48,9 @@ export default function TimerProvider({ children }) {
               : DEFAULT_LONG_BREAK
             : DEFAULT_FOCUS_SESSION
         ),
-        // parseInt(timer.second),
+        parseInt(timer.second),
       ]),
-    [onBreak, session, timer.hour, timer.minute]
+    [onBreak, session, timer.hour, timer.second]
   );
 
   const tick = useCallback(() => {
