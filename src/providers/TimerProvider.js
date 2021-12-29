@@ -102,6 +102,7 @@ export default function TimerProvider({ children }) {
     clearInterval(timerId);
     const currentTimerId = setInterval(() => tick(), 1000);
     setTimerId(currentTimerId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tick]);
 
   const memorizedValues = useMemo(
