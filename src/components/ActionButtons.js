@@ -10,7 +10,7 @@ const ActionButtonsWrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-bottom: 50px;
+  margin-bottom: 10px;
 `;
 
 const ActionButton = styled.button`
