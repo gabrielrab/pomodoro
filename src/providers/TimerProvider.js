@@ -6,9 +6,22 @@ import React, {
   useMemo,
 } from "react";
 
+import { createNotification } from "@hooks/useNotification";
+
 const DEFAULT_FOCUS_SESSION = 25;
 const DEFAULT_SHORT_BREAK = 5;
 const DEFAULT_LONG_BREAK = 30;
+
+const NOTIFICATION_MESSAGES = {
+  break: {
+    title: "🎯 Sua sessão chegou ao fim. ",
+    body: "Sua sessão chegou ao fim, tire um momento para descansar",
+  },
+  work: {
+    title: "💪🏻 Hora de voltar ao trabalho",
+    body: "",
+  },
+};
 
 const TimerContext = createContext();
 
@@ -44,6 +57,10 @@ export default function TimerProvider({ children }) {
 
   const tick = useCallback(() => {
     if (hr === 0 && min === 0 && sec === 0) {
+      createNotification(
+        NOTIFICATION_MESSAGES[onBreak ? "work" : "break"].title,
+        NOTIFICATION_MESSAGES[onBreak ? "work" : "break"].body
+      );
       onBreak && setSession((state) => state + 1);
       setOnBreak(!onBreak);
       reset();
