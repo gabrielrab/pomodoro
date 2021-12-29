@@ -1,6 +1,6 @@
 import React from "react";
 import coding from "@assets/coding.gif";
-import relax from "@assets/relax.gif";
+import sleep from "@assets/sleep.gif";
 
 import styled from "styled-components";
 
@@ -27,7 +27,7 @@ export default function SessionStatus({ onBreak }) {
   return (
     <SessionStatusWrapper>
       {onBreak ? (
-        <ImageRelaxWrapper src={relax} alt="Focus time" />
+        <ImageRelaxWrapper src={sleep} alt="Focus time" />
       ) : (
         <ImageCodingWrapper src={coding} alt="Focus time" />
       )}
