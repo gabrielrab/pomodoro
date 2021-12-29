@@ -1,4 +1,10 @@
-import React, { createContext, useCallback, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useCallback,
+  useEffect,
+  useState,
+  useMemo,
+} from "react";
 
 const DEFAULT_FOCUS_SESSION = 25;
 const DEFAULT_SHORT_BREAK = 5;
@@ -51,21 +57,27 @@ export default function TimerProvider({ children }) {
   }, [hr, min, onBreak, reset, sec]);
 
   const start = useCallback(() => {
-    setOnPause(false);
+    clearInterval(timerId);
     let currentTimer = setInterval(() => tick(), 1000);
     setTimerId(currentTimer);
-  }, [tick]);
+    setOnPause(false);
+  }, [tick, timerId]);
 
-  const pause = useCallback(() => {
+  const pause = () => {
     clearInterval(timerId);
     setOnPause(true);
-  }, [timerId]);
+  };
 
   useEffect(() => {
-    const timerId = setInterval(() => tick(), 1000);
-    setTimerId(timerId);
-    return () => clearInterval(timerId);
+    clearInterval(timerId);
+    const currentTimerId = setInterval(() => tick(), 1000);
+    setTimerId(currentTimerId);
   }, [tick]);
+
+  const memorizedValues = useMemo(
+    () => ({ onPause, session }),
+    [onPause, session]
+  );
 
   return (
     <TimerContext.Provider
@@ -75,10 +87,9 @@ export default function TimerProvider({ children }) {
         reset,
         timerId,
         start,
-        onPause,
         pause,
-        session,
         onBreak,
+        ...memorizedValues,
       }}
     >
       {children}
