@@ -34,8 +34,7 @@ export default function TimerProvider({ children }) {
   const [endAt, setEndAt] = useState(
     format(addMinutes(new Date(), DEFAULT_FOCUS_SESSION), "HH:mm")
   );
-  // const timer = { hour: 0, minute: DEFAULT_FOCUS_SESSION, second: 0 };
-  const timer = { hour: 0, minute: 0, second: 5 };
+  const timer = { hour: 0, minute: DEFAULT_FOCUS_SESSION, second: 0 };
   const [[hr, min, sec], setTime] = useState([
     timer.hour,
     timer.minute,
@@ -88,11 +87,28 @@ export default function TimerProvider({ children }) {
   }, [hr, min, onBreak, reset, sec]);
 
   const start = useCallback(() => {
+    if (session === 1) {
+      setEndAt(
+        format(
+          addMinutes(
+            new Date(),
+            !onBreak
+              ? session % 4
+                ? DEFAULT_SHORT_BREAK
+                : DEFAULT_LONG_BREAK
+              : DEFAULT_FOCUS_SESSION
+          ),
+          "HH:mm"
+        )
+      );
+    } else {
+      setEndAt(format(addMinutes(new Date(), min), "HH:mm"));
+    }
     clearInterval(timerId);
     let currentTimer = setInterval(() => tick(), 1000);
     setTimerId(currentTimer);
     setOnPause(false);
-  }, [tick, timerId]);
+  }, [min, onBreak, session, tick, timerId]);
 
   const pause = () => {
     clearInterval(timerId);
