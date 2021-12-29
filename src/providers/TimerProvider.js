@@ -34,7 +34,8 @@ export default function TimerProvider({ children }) {
   const [endAt, setEndAt] = useState(
     format(addMinutes(new Date(), DEFAULT_FOCUS_SESSION), "HH:mm")
   );
-  const timer = { hour: 0, minute: DEFAULT_FOCUS_SESSION, second: 0 };
+  // const timer = { hour: 0, minute: DEFAULT_FOCUS_SESSION, second: 0 };
+  const timer = { hour: 0, minute: 0, second: 5 };
   const [[hr, min, sec], setTime] = useState([
     timer.hour,
     timer.minute,

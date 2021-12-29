@@ -16,7 +16,7 @@ const ActionButtonsWrapper = styled.div`
 const ActionButton = styled.button`
   padding: 5px 30px;
   border: none;
-  border-radius: 3px;
+  border-radius: 30px;
   margin: 8px;
 `;
 

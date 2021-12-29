@@ -1,8 +1,11 @@
 import React from "react";
 import coding from "@assets/coding.gif";
 import sleep from "@assets/sleep.gif";
+import pause from "@assets/firefighters.gif";
 
 import styled from "styled-components";
+
+import useTimer from "@hooks/useTimer";
 
 const SessionStatusWrapper = styled.div`
   width: 100%;
@@ -23,11 +26,20 @@ const ImageRelaxWrapper = styled.img`
   transition: 0.2s linear;
 `;
 
-export default function SessionStatus({ onBreak }) {
+export default function SessionStatus() {
+  const { onBreak, onPause } = useTimer();
+  if (onPause) {
+    return (
+      <SessionStatusWrapper>
+        <ImageRelaxWrapper src={pause} alt="Pause time" />
+      </SessionStatusWrapper>
+    );
+  }
+
   return (
     <SessionStatusWrapper>
       {onBreak ? (
-        <ImageRelaxWrapper src={sleep} alt="Focus time" />
+        <ImageRelaxWrapper src={sleep} alt="Break time" />
       ) : (
         <ImageCodingWrapper src={coding} alt="Focus time" />
       )}
